@@ -6,9 +6,10 @@ COPY ./ .
 RUN export NODE_OPTIONS=--openssl-legacy-provider npm run build
 
 FROM nginx as production-stage
-RUN cd /var/www/chrisdaviesweb-fe/html
 RUN mkdir /app
 RUN ls -l
 RUN pwd
+RUN cd app
+RUN ls -l
 COPY --from=build-stage /app/dist /app
 COPY nginx.conf /etc/nginx/nginx.conf
