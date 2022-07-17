@@ -4,7 +4,7 @@
       <router-link to="/">
         <img
           v-if="!homepage && logo"
-          :src="`${baseUrl}${logo.formats.medium.url}`"
+          :src="`${baseUrl}${logo.url}`"
           :alt="logo.alternativeText"
           class="the-header__home"
         />
