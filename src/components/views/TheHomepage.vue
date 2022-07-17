@@ -1,15 +1,14 @@
 <template>
   <div class="the-homepage">
-    <h1 class="the-homepage__header" ref="typeIn" v-if="homepage">
+    <h1 class="the-homepage__header" ref="typeIn">
       {{ homepage.attributes.title }}
     </h1>
-    <div class="the-homepage__desc" v-if="homepage">
+    <div class="the-homepage__desc">
       {{ homepage.attributes.description }}
     </div>
     <div class="the-homepage__hero">
       <div class="the-homepage__hero-image bb">
         <img
-          v-if="homepage"
           :data-src="`${baseUrl}${homepage.attributes.secondary.data.attributes.formats.medium.url}`"
           :src="`${baseUrl}${homepage.attributes.main.data.attributes.formats.medium.url}`"
           :alt="homepage.attributes.main.data.attributes.alternativeText"
