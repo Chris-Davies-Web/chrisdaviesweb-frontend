@@ -4,10 +4,7 @@
       <div class="project">
         <h1 v-if="projectTile.logo">
           <img
-            :src="
-              'http://localhost:1337' +
-              projectTile.logo.attributes.formats.thumbnail.url
-            "
+            :src="baseUrl + projectTile.logo.attributes.formats.thumbnail.url"
           />
         </h1>
         <h1 v-else>{{ projectTile.name }}</h1>
@@ -25,7 +22,7 @@
             <div class="skill-logo" v-if="skill.logo">
               <img
                 :src="
-                  'http://localhost:1337' +
+                  baseUrl +
                   skill.logo.attributes.image.data[0].attributes.formats
                     .thumbnail.url
                 "
@@ -59,6 +56,7 @@ export default {
         logo: null,
       },
       skillLogos: false,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
   computed: {
@@ -76,7 +74,7 @@ export default {
     },
     async getLogoAndSkills() {
       const response = await axios.get(
-        `http://localhost:1337/api/projects/${this.projectId}?populate=*`
+        `${this.baseUrl}/api/projects/${this.projectId}?populate=*`
       );
       this.projectTile.skills = response.data.data.attributes.skills.data;
       this.projectTile.logo = response.data.data.attributes.logo.data;
@@ -84,10 +82,9 @@ export default {
     async getSkillLogos() {
       await this.projectTile.skills.forEach(async (skill) => {
         const response = await axios.get(
-          `http://localhost:1337/api/skills/${skill.id}?populate=*`
+          `${this.baseUrl}/api/skills/${skill.id}?populate=*`
         );
-        skill.logo = response.data.data;
-        console.log("skill", skill);
+        this.skill.logo = response.data.data;
       });
 
       this.skillLogos = true;

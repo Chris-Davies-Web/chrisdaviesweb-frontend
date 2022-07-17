@@ -14,12 +14,13 @@ export default {
     return {
       about: null,
       error: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
   async mounted() {
     try {
       const response = await axios.get(
-        "http://localhost:1337/api/about-me?populate=*"
+        `${this.baseUrl}/api/about-me?populate=*`
       );
       this.about = response.data.data.attributes;
     } catch (error) {

@@ -3,7 +3,12 @@
     <h1>Blogs</h1>
     <template v-if="blogs">
       <div class="blogs">
-        <blog-tile v-for="blog in blogs" :key="blog.id" :blog="blog" />
+        <blog-tile
+          v-for="blog in blogs"
+          :key="blog.id"
+          :blog="blog"
+          :baseUrl="baseUrl"
+        />
       </div>
     </template>
   </div>
@@ -20,13 +25,12 @@ export default {
     return {
       blogs: null,
       error: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
   async mounted() {
     try {
-      const response = await axios.get(
-        "http://localhost:1337/api/blogs?populate=*"
-      );
+      const response = await axios.get(`${this.baseUrl}/api/blogs?populate=*`);
       this.blogs = response.data.data;
     } catch (error) {
       this.error = error;

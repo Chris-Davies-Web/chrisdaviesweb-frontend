@@ -6,6 +6,7 @@ module.exports = {
     "eslint:recommended",
   ],
   "env": {
-    "jest": true
+    "jest": true,
+    "node": true
     }
 };

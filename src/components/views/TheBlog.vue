@@ -21,6 +21,7 @@ export default {
     return {
       blog: null,
       error: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
   computed: {
@@ -32,7 +33,7 @@ export default {
     try {
       console.log(this.$route.params.id);
       const response = await axios.get(
-        `http://localhost:1337/api/blogs/${this.$route.params.id}`
+        `${this.baseUrl}/api/blogs/${this.$route.params.id}`
       );
       this.blog = response.data.data;
       console.log(this.blog);

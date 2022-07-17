@@ -4,7 +4,7 @@
       <router-link to="/">
         <img
           v-if="!homepage && logo"
-          :src="`http://localhost:1337${logo.formats.medium.url}`"
+          :src="`${baseUrl}${logo.formats.medium.url}`"
           :alt="logo.alternativeText"
           class="the-header__home"
         />
@@ -27,13 +27,14 @@ export default {
     return {
       menu: null,
       logo: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
 
   async mounted() {
     try {
       const response = await axios.get(
-        "http://localhost:1337/api/menus/1?populate=*"
+        `${this.baseUrl}/api/menus/1?populate=*`
       );
       this.menu = response.data.data.attributes.mainNav;
 

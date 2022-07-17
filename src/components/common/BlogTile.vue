@@ -5,7 +5,7 @@
         <div class="blog-tile__image">
           <img
             :src="
-              'http://localhost:1337' +
+              baseUrl +
               blog.attributes.featuredImage.data.attributes.formats.large.url
             "
           />
@@ -21,9 +21,10 @@
 
 <script>
 import moment from "moment";
+
 export default {
   name: "BlogTile",
-  props: ["blog"],
+  props: ["blog", "baseUrl"],
 
   computed: {
     publishedDate() {

@@ -30,6 +30,7 @@ export default {
       work: null,
       error: null,
       project: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
   async mounted() {
@@ -37,7 +38,7 @@ export default {
       const id = this.$route.params.id;
       console.log(id);
       const response = await axios.get(
-        `http://localhost:1337/api/projects/${id}?populate=*`
+        `${this.baseUrl}/api/projects/${id}?populate=*`
       );
       this.project = response.data.data.attributes;
     } catch (error) {

@@ -10,8 +10,8 @@
       <div class="the-homepage__hero-image bb">
         <img
           v-if="homepage"
-          :data-src="`http://localhost:1337${homepage.attributes.secondary.data.attributes.formats.medium.url}`"
-          :src="`http://localhost:1337${homepage.attributes.main.data.attributes.formats.medium.url}`"
+          :data-src="`${baseUrl}${homepage.attributes.secondary.data.attributes.formats.medium.url}`"
+          :src="`${baseUrl}${homepage.attributes.main.data.attributes.formats.medium.url}`"
           :alt="homepage.attributes.main.data.attributes.alternativeText"
         />
       </div>
@@ -41,14 +41,16 @@ export default {
     return {
       homepage: null,
       error: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
 
   async mounted() {
     try {
+      console.log("baseUrl", this.baseUrl);
       // Get Data
       const response = await axios.get(
-        `http://localhost:1337/api/homepage?populate=*`
+        `${this.baseUrl}/api/homepage?populate=*`
       );
       this.homepage = response.data.data;
 

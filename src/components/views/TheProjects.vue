@@ -31,13 +31,12 @@ export default {
       error: null,
       projects: null,
       skills: null,
+      baseUrl: process.env.VUE_APP_ROUTE_API,
     };
   },
   async created() {
     try {
-      const response = await axios.get(
-        "http://localhost:1337/api/work?populate=*"
-      );
+      const response = await axios.get(`${this.baseUrl}/api/work?populate=*`);
       this.work = response.data.data.attributes;
       this.projects = response.data.data.attributes.projects.data;
       console.log(this.projects);
