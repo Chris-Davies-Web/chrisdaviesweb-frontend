@@ -22,9 +22,7 @@
             <div class="skill-logo" v-if="skill.logo">
               <img
                 :src="
-                  baseUrl +
-                  skill.logo.attributes.image.data[0].attributes.formats
-                    .thumbnail.url
+                  baseUrl + skill.logo.attributes.image.data[0].attributes.url
                 "
                 :alt="
                   skill.logo.attributes.image.data[0].attributes.alternativeText

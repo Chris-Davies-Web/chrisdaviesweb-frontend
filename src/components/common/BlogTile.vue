@@ -4,10 +4,7 @@
       <div class="blog">
         <div class="blog-tile__image">
           <img
-            :src="
-              baseUrl +
-              blog.attributes.featuredImage.data.attributes.formats.large.url
-            "
+            :src="baseUrl + blog.attributes.featuredImage.data.attributes.url"
           />
         </div>
         <div class="blog-tile__details">

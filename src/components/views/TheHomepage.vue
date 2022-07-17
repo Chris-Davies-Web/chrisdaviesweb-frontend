@@ -10,11 +10,10 @@
       <div class="the-homepage__hero-image bb">
         <img
           v-if="homepage"
-          :data-src="`${baseUrl}${homepage.attributes.secondary.data.attributes.formats.medium.url}`"
-          :src="`${baseUrl}${homepage.attributes.main.data.attributes.formats.medium.url}`"
+          :data-src="`${baseUrl}${homepage.attributes.secondary.data.attributes.url}`"
+          :src="`${baseUrl}${homepage.attributes.main.data.attributes.url}`"
           :alt="homepage.attributes.main.data.attributes.alternativeText"
         />
-        {{ homepage }}
       </div>
     </div>
 
