@@ -54,6 +54,8 @@ export default {
       );
       this.homepage = response.data.data;
 
+      console.log("this.homepage", this.homepage);
+
       // Typewriter effect
       // new Typewriter(this.$refs.typeIn, {
       //   strings: ["Hello", "World"],
