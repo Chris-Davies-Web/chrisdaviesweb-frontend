@@ -32,6 +32,7 @@ export default {
     try {
       const response = await axios.get(`${this.baseUrl}/api/blogs?populate=*`);
       this.blogs = response.data.data;
+      console.log("this.blogs", this.blogs);
     } catch (error) {
       this.error = error;
     }

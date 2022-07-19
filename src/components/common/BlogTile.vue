@@ -3,9 +3,7 @@
     <div class="blog-container">
       <div class="blog">
         <div class="blog-tile__image">
-          <img
-            :src="baseUrl + blog.attributes.featuredImage.data.attributes.url"
-          />
+          <img :src="baseUrl + blog.attributes.featuredImage.url" />
         </div>
         <div class="blog-tile__details">
           <h1>{{ blog.attributes.title }}</h1>

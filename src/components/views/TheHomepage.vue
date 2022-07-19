@@ -3,9 +3,6 @@
     <h1 class="the-homepage__header" ref="typeIn" v-if="homepage">
       {{ homepage.attributes.title }}
     </h1>
-    <div class="the-homepage__desc" v-if="homepage">
-      {{ homepage.attributes.description }}
-    </div>
     <div class="the-homepage__hero">
       <div class="the-homepage__hero-image bb">
         <img
@@ -13,8 +10,17 @@
           :data-src="`${baseUrl}${homepage.attributes.secondary.data.attributes.url}`"
           :src="`${baseUrl}${homepage.attributes.main.data.attributes.url}`"
           :alt="homepage.attributes.main.data.attributes.alternativeText"
+          ref="hero"
+          @mouseover="handleHover"
+          @mouseleave="handleHover"
         />
       </div>
+    </div>
+
+    <div class="the-homepage__desc" v-if="homepage">
+      <vue-simple-markdown
+        :source="homepage.attributes.description"
+      ></vue-simple-markdown>
     </div>
 
     <!-- <slot name="menu">
@@ -43,6 +49,17 @@ export default {
       error: null,
       baseUrl: process.env.VUE_APP_ROUTE_API,
     };
+  },
+
+  methods: {
+    handleHover() {
+      const image = this.$refs.hero;
+      const imageOne = image.getAttribute("src");
+      const imageTwo = image.getAttribute("data-src");
+
+      image.setAttribute("src", imageTwo);
+      image.setAttribute("data-src", imageOne);
+    },
   },
 
   async mounted() {

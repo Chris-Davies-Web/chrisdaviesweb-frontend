@@ -2,12 +2,10 @@
   <router-link class="project-link" :to="'/projects/' + this.projectId">
     <div class="project-container">
       <div class="project">
-        <h1 v-if="projectTile.logo">
-          <img
-            :src="baseUrl + projectTile.logo.attributes.formats.thumbnail.url"
-          />
+        <h1 v-if="projectTile.logo" class="project-image">
+          <img :src="baseUrl + projectTile.logo.attributes.url" />
         </h1>
-        <h1 v-else>{{ projectTile.name }}</h1>
+        <h1 class="project-name" v-else>{{ projectTile.name }}</h1>
         <p class="project-position">
           {{ projectTile.role }} @ {{ projectTile.company }}
         </p>
@@ -21,9 +19,7 @@
           >
             <div class="skill-logo" v-if="skill.logo">
               <img
-                :src="
-                  baseUrl + skill.logo.attributes.image.data[0].attributes.url
-                "
+                :src="baseUrl + skill.logo.attributes.image.data[0].url"
                 :alt="
                   skill.logo.attributes.image.data[0].attributes.alternativeText
                 "
@@ -59,7 +55,9 @@ export default {
   },
   computed: {
     to() {
-      return moment(this.projectTile.to).format("MMMM YYYY");
+      return this.projectTile.to
+        ? moment(this.projectTile.to).format("MMMM YYYY")
+        : "Today";
     },
     from() {
       return moment(this.projectTile.from).format("MMMM YYYY");
@@ -114,6 +112,14 @@ export default {
   background: white;
 }
 
+.project .project-name {
+  height: 65px;
+}
+
+.project .project-position {
+  height: 40px;
+}
+
 .project:hover {
   transition: all 0.4s;
   border: solid 1px rgb(99, 97, 97);
@@ -133,17 +139,48 @@ export default {
   text-decoration: none;
 }
 
+.project-image {
+  margin-top: 0;
+  height: 100px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
 .project img {
   max-width: 100%;
-  max-height: 100px;
+  height: fit-content;
 }
 
 .skills {
   display: flex;
   padding-top: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow: auto;
   margin-top: 15px;
   border-top: 1px solid lightgrey;
+}
+
+.skills::-webkit-scrollbar {
+  width: 10px;
+  height: 3px;
+}
+
+/* Track */
+.skills::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.skills::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.skills::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .skill-pill {

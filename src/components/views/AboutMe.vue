@@ -35,7 +35,7 @@ export default {
 .about-me {
   display: flex;
   flex-direction: column;
-  max-width: 80%;
+  max-width: 500px;
   justify-content: center;
   margin: auto;
 }

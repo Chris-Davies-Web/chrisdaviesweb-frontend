@@ -1,8 +1,10 @@
 <template>
   <div class="project">
     <div class="container">
-      <h1>{{ project.name }}</h1>
-      <p>{{ project.role }}</p>
+      <a :href="project.url">
+        <h1>{{ project.name }}</h1>
+      </a>
+      <p class="project-role">{{ project.role }}</p>
 
       <div class="content">
         <div class="description">
@@ -11,6 +13,13 @@
           ></vue-simple-markdown>
         </div>
         <div class="skills">
+          <a :href="project.url">
+            <img
+              class="project-logo"
+              :src="baseUrl + project.logo.data.attributes.url"
+            />
+          </a>
+          <h3>Skills</h3>
           <span v-for="skill in project.skills.data" :key="skill">
             {{ skill.attributes.name }}
           </span>
@@ -36,7 +45,6 @@ export default {
   async mounted() {
     try {
       const id = this.$route.params.id;
-      console.log(id);
       const response = await axios.get(
         `${this.baseUrl}/api/projects/${id}?populate=*`
       );
@@ -62,12 +70,24 @@ export default {
   flex-direction: column;
 }
 
+.project-role {
+  font-weight: bold;
+}
+
+.project-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
 .content {
+  margin-top: 50px;
   display: flex;
 }
 
 .description {
   width: 80%;
+  margin: 0 50px;
 }
 
 .skills {
@@ -75,6 +95,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-left: solid 1px;
 }
 
 .skills span {
